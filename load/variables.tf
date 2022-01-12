@@ -13,3 +13,8 @@ variable "branch" {
 variable "env_suffix" {
   type = string
 }
+
+variable "cloudbuild_file" {
+  type        = string
+  description = "File used for cloudbuild"
+}
