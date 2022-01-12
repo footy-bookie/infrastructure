@@ -1,7 +1,7 @@
 ##############################
 # Infra Cloud Build triggers #
 ##############################
-resource "google_cloudbuild_trigger" "infracture_build_trigger" {
+resource "google_cloudbuild_trigger" "infrastructure_build_trigger" {
   project = var.project
 
   trigger_template {

@@ -27,3 +27,7 @@ variable "cloudbuild_sa" {
   type        = string
   description = "Service account used for build pipelines"
 }
+
+variable "env_suffix" {
+  type = string
+}
