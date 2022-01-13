@@ -8,6 +8,11 @@ variable "location" {
   description = "Project location"
 }
 
+variable "zone" {
+  type        = string
+  description = "Project zone"
+}
+
 variable "branch" {
   type        = string
   description = "Git branch used for builds"

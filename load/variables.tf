@@ -6,6 +6,10 @@ variable "location" {
   type = string
 }
 
+variable "zone" {
+  type = string
+}
+
 variable "branch" {
   type = string
 }

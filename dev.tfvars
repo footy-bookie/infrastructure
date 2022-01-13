@@ -1,5 +1,6 @@
 branch          = "main"
 location        = "europe-west3"
+zone            = "europe-west3-a"
 project         = "fake-client-project"
 project_number  = "895133031100"
 cloudbuild_file = "cloudbuild_dev.yaml"
