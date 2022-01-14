@@ -36,3 +36,11 @@ variable "cloudbuild_sa" {
 variable "env_suffix" {
   type = string
 }
+
+variable "footy_key_name" {
+  type = string
+}
+
+variable "footy_username" {
+  type = string
+}

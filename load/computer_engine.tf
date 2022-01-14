@@ -25,6 +25,13 @@ resource "google_compute_instance" "stats_import_vm" {
   }
   // Apply the firewall rule to allow external IPs to access this instance
   tags                    = ["http-server", "https-server"]
+
+  metadata = {
+    FOOTY_KEY_NAME = var.footy_key_name
+    FOOTY_USERNAME = var.footy_username
+    PROJECT_NUMBER = var.project_number
+    SINK           = google_storage_bucket.footy_stats_sink.name
+  }
 }
 
 resource "google_compute_firewall" "http-server" {
