@@ -13,7 +13,7 @@ resource "google_cloudfunctions_function" "StartServer" {
   entry_point           = "main"
   region                = var.location
   # invocation service account or ingress_settings = "ALLOW_INTERNAL_ONLY" setting,not both
-  service_account_email = google_service_account.starts_stats_import_sa.email
+  service_account_email = "fake-client-project@appspot.gserviceaccount.com"
   # make sure that paths (currently src) is the same in here and in the corresponding cloud build trigger
   source_repository {
     url = "https://source.developers.google.com/projects/${var.project}/repos/${var.start_import_vm_repo}/moveable-aliases/${var.branch}/paths/src"
@@ -41,7 +41,7 @@ resource "google_cloudfunctions_function" "EndServer" {
   entry_point           = "main"
   region                = var.location
   # invocation service account or ingress_settings = "ALLOW_INTERNAL_ONLY" setting,not both
-  service_account_email = google_service_account.ends_stats_import_sa.email
+  service_account_email = "fake-client-project@appspot.gserviceaccount.com"
   # make sure that paths (currently src) is the same in here and in the corresponding cloud build trigger
   source_repository {
     url = "https://source.developers.google.com/projects/${var.project}/repos/${var.end_import_vm_repo}/moveable-aliases/${var.branch}/paths/src"

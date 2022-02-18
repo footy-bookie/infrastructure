@@ -52,3 +52,19 @@ resource "google_project_iam_member" "compute_engine_ends_stats_import_sa" {
   member  = "serviceAccount:${google_service_account.stats_import_sa.email}"
   role    = "roles/compute.admin"
 }
+
+
+######################
+# SCHEDULER START VM #
+######################
+resource "google_service_account" "static_data_scheduler_sa" {
+  account_id   = "start-vm-scheduler-sa"
+  project      = var.project
+  display_name = "Start Vm service account"
+}
+
+resource "google_project_iam_member" "cloudfunction_invoker_role_to_start_vm_scheduler_sa" {
+  project = var.project
+  member  = "serviceAccount:${google_service_account.starts_stats_import_sa.email}"
+  role    = "roles/cloudfunctions.invoker"
+}
