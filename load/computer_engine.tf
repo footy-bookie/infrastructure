@@ -17,14 +17,14 @@ resource "google_compute_instance" "stats_import_vm" {
       // Ephemeral public IP
     }
   }
-  metadata_startup_script = ""
+  metadata_startup_script = "echo  SINK=dev-footy_stats_sink >> /etc/profile"
   service_account {
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
     email  = google_service_account.stats_import_sa.email
     scopes = ["cloud-platform"]
   }
   // Apply the firewall rule to allow external IPs to access this instance
-  tags                    = ["http-server", "https-server"]
+  tags = ["http-server", "https-server"]
 
   metadata = {
     FOOTY_KEY_NAME = var.footy_key_name

@@ -44,3 +44,15 @@ variable "footy_key_name" {
 variable "footy_username" {
   type = string
 }
+
+variable "instance_name" {
+  type = string
+}
+
+variable "start_import_vm_repo" {
+  type = string
+}
+
+variable "end_import_vm_repo" {
+  type = string
+}

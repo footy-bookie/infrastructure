@@ -19,3 +19,36 @@ resource "google_project_iam_member" "secretmanager_role_stats_import_sa" {
   member  = "serviceAccount:${google_service_account.stats_import_sa.email}"
   role    = "roles/secretmanager.admin"
 }
+
+###################################
+# STARTS IMPORT VM SERVICEACCOUNT #
+###################################
+
+resource "google_service_account" "starts_stats_import_sa" {
+  project      = var.project
+  account_id   = "starts-stats-import-sa"
+  display_name = "Starts Footy Stats Import Service Account"
+}
+
+resource "google_project_iam_member" "compute_engine_starts_stats_import_sa" {
+  project = var.project
+  member  = "serviceAccount:${google_service_account.stats_import_sa.email}"
+  role    = "roles/compute.admin"
+}
+
+
+################################
+# END IMPORT VM SERVICEACCOUNT #
+################################
+
+resource "google_service_account" "ends_stats_import_sa" {
+  project      = var.project
+  account_id   = "ends-stats-import-sa"
+  display_name = "Ends Footy Stats Import Service Account"
+}
+
+resource "google_project_iam_member" "compute_engine_ends_stats_import_sa" {
+  project = var.project
+  member  = "serviceAccount:${google_service_account.stats_import_sa.email}"
+  role    = "roles/compute.admin"
+}
