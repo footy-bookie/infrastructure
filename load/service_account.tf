@@ -57,7 +57,7 @@ resource "google_project_iam_member" "compute_engine_ends_stats_import_sa" {
 ######################
 # SCHEDULER START VM #
 ######################
-resource "google_service_account" "static_data_scheduler_sa" {
+resource "google_service_account" "static_data_start_scheduler_sa" {
   account_id   = "start-vm-scheduler-sa"
   project      = var.project
   display_name = "Start Vm service account"
@@ -66,5 +66,20 @@ resource "google_service_account" "static_data_scheduler_sa" {
 resource "google_project_iam_member" "cloudfunction_invoker_role_to_start_vm_scheduler_sa" {
   project = var.project
   member  = "serviceAccount:${google_service_account.starts_stats_import_sa.email}"
+  role    = "roles/cloudfunctions.invoker"
+}
+
+####################
+# SCHEDULER END VM #
+####################
+resource "google_service_account" "static_data_end_scheduler_sa" {
+  account_id   = "end-vm-scheduler-sa"
+  project      = var.project
+  display_name = "End Vm service account"
+}
+
+resource "google_project_iam_member" "cloudfunction_invoker_role_to_end_vm_scheduler_sa" {
+  project = var.project
+  member  = "serviceAccount:${google_service_account.ends_stats_import_sa.email}"
   role    = "roles/cloudfunctions.invoker"
 }

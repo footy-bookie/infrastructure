@@ -39,5 +39,5 @@ resource "google_cloudbuild_trigger" "end_server_trigger" {
   }
 
   filename = "cloudbuild.yaml"
-  name     = "end-server-import-trigger"
+  name     = "end-server-trigger"
 }
