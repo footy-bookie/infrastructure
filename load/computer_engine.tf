@@ -17,7 +17,8 @@ resource "google_compute_instance" "stats_import_vm" {
       // Ephemeral public IP
     }
   }
-  metadata_startup_script = "echo  SINK=dev-footy_stats_sink >> /etc/profile"
+  metadata_startup_script = file("${path.module}/startup.sh")
+
   service_account {
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
     email  = google_service_account.stats_import_sa.email
