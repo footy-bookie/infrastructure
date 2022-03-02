@@ -1,7 +1,7 @@
 resource "google_cloud_scheduler_job" "start_vm_scheduler" {
   name             = "static_data_start_import_scheduler"
   description      = "Triggers the start vm Cloud Function to start vm"
-  schedule         = "0 1 * * *"
+  schedule         = "45 17 * * 4"
   time_zone        = "Europe/Berlin"
   region           = var.location
   attempt_deadline = "540s"
@@ -26,7 +26,7 @@ resource "google_cloud_scheduler_job" "start_vm_scheduler" {
   resource "google_cloud_scheduler_job" "end_vm_scheduler" {
   name             = "static_data_end_import_scheduler"
   description      = "Triggers the end vm Cloud Function to start vm"
-  schedule         = "0 1 * * *"
+  schedule         = "0 21 * * MON-FRI"
   time_zone        = "Europe/Berlin"
   region           = var.location
   attempt_deadline = "540s"
