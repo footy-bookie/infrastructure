@@ -13,6 +13,7 @@ resource "google_cloudbuild_trigger" "infrastructure_build_trigger" {
   name     = "infra-trigger"
 }
 
+
 ##########################################
 # Cloudbuild service account permissions #
 ##########################################
