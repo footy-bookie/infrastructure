@@ -1,1 +1,1 @@
-bucket = "footy-tf-state-dev2"
+bucket = "footy-dev-tf-state"
