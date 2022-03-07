@@ -56,3 +56,11 @@ variable "start_import_vm_repo" {
 variable "end_import_vm_repo" {
   type = string
 }
+
+variable "teams_import_wildcard_object" {
+  type = string
+}
+
+variable "matches_import_wildcard_object" {
+  type = string
+}
