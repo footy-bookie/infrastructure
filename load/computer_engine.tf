@@ -68,7 +68,7 @@ resource "google_compute_instance" "processor_vm" {
     FOOTY_KEY_NAME = var.footy_key_name
     FOOTY_USERNAME = var.footy_username
     PROJECT_NUMBER = var.project_number
-    SINK           = google_storage_bucket.footy_stats_sink.name
+    SINK           = google_storage_bucket.footy_aa_sink.name
   }
 }
 
