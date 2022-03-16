@@ -36,7 +36,7 @@ resource "google_compute_instance" "stats_import_vm" {
 }
 
 resource "google_compute_instance" "processor_vm" {
-  name         = "aa-vm"
+  name         = "processor-vm"
   machine_type = "e2-micro"
   zone         = var.zone
   project      = var.project
@@ -58,7 +58,7 @@ resource "google_compute_instance" "processor_vm" {
 
   service_account {
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-    email  = google_service_account.stats_import_sa.email
+    email  = google_service_account.processor_vm_sa.email
     scopes = ["cloud-platform"]
   }
   // Apply the firewall rule to allow external IPs to access this instance
@@ -69,6 +69,7 @@ resource "google_compute_instance" "processor_vm" {
     FOOTY_USERNAME = var.footy_username
     PROJECT_NUMBER = var.project_number
     SINK           = google_storage_bucket.footy_aa_sink.name
+    IMPORT_SINK    = google_storage_bucket.footy_stats_sink.name
     CLIMBER_STORAGE = google_storage_bucket_object.footy_stats_sink_climbers_object.name
   }
 }

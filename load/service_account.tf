@@ -20,6 +20,28 @@ resource "google_project_iam_member" "secretmanager_role_stats_import_sa" {
   role    = "roles/secretmanager.admin"
 }
 
+##################################
+# TRANSFORM AA VM SERVICEACCOUNT #
+##################################
+
+resource "google_service_account" "processor_vm_sa" {
+  project      = var.project
+  account_id   = "processor-vm-sa"
+  display_name = "Footy transform aa Service Account"
+}
+
+resource "google_project_iam_member" "storage_admin_role_processor_vm_sa" {
+  project = var.project
+  member  = "serviceAccount:${google_service_account.processor_vm_sa.email}"
+  role    = "roles/storage.admin"
+}
+
+resource "google_project_iam_member" "bigquery_admin_role_processor_vm_sa" {
+  project = var.project
+  member  = "serviceAccount:${google_service_account.processor_vm_sa.email}"
+  role    = "roles/bigquery.admin"
+}
+
 ###################################
 # STARTS IMPORT VM SERVICEACCOUNT #
 ###################################
