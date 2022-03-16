@@ -69,6 +69,7 @@ resource "google_compute_instance" "processor_vm" {
     FOOTY_USERNAME = var.footy_username
     PROJECT_NUMBER = var.project_number
     SINK           = google_storage_bucket.footy_aa_sink.name
+    CLIMBER_STORAGE = google_storage_bucket_object.footy_stats_sink_climbers_object.name
   }
 }
 
