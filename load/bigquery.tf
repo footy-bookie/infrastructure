@@ -734,3 +734,165 @@ resource "google_bigquery_table" "teams_import" {
     ]
   }
 }
+
+resource "google_bigquery_table" "matches_import" {
+  dataset_id = google_bigquery_dataset.data_warehouse.dataset_id
+  table_id   = "src_matches_import"
+  project    = var.project
+
+  external_data_configuration {
+    autodetect    = false
+    source_format = "CSV"
+    schema        = <<EOF
+                   [
+  { "name": "timestamp", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "date_GMT", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "status", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "attendance", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "home_team_name", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "away_team_name", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "referee", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "Game_Week", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "Pre_Match_PPG__Home_", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "Pre_Match_PPG__Away_", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "home_ppg", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "away_ppg", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "home_team_goal_count", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "away_team_goal_count", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "total_goal_count", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "total_goals_at_half_time", "type": "STRING", "mode": "NULLABLE" },
+  {
+    "name": "home_team_goal_count_half_time",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "away_team_goal_count_half_time",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  { "name": "home_team_goal_timings", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "away_team_goal_timings", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "home_team_corner_count", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "away_team_corner_count", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "home_team_yellow_cards", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "home_team_red_cards", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "away_team_yellow_cards", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "away_team_red_cards", "type": "STRING", "mode": "NULLABLE" },
+  {
+    "name": "home_team_first_half_cards",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "home_team_second_half_cards",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "away_team_first_half_cards",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "away_team_second_half_cards",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  { "name": "home_team_shots", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "away_team_shots", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "home_team_shots_on_target", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "away_team_shots_on_target", "type": "STRING", "mode": "NULLABLE" },
+  {
+    "name": "home_team_shots_off_target",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "away_team_shots_off_target",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  { "name": "home_team_fouls", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "away_team_fouls", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "home_team_possession", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "away_team_possession", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "team_a_xg", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "team_b_xg", "type": "STRING", "mode": "NULLABLE" },
+  {
+    "name": "average_goals_per_match_pre_match",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  { "name": "btts_percentage_pre_match", "type": "STRING", "mode": "NULLABLE" },
+  {
+    "name": "over_15_percentage_pre_match",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "over_25_percentage_pre_match",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "over_35_percentage_pre_match",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "over_45_percentage_pre_match",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "over_15_HT_FHG_percentage_pre_match",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "over_05_HT_FHG_percentage_pre_match",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "over_15_2HG_percentage_pre_match",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "over_05_2HG_percentage_pre_match",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "average_corners_per_match_pre_match",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "average_cards_per_match_pre_match",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  { "name": "odds_ft_home_team_win", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "odds_ft_draw", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "odds_ft_away_team_win", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "odds_ft_over15", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "odds_ft_over25", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "odds_ft_over35", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "odds_ft_over45", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "odds_btts_yes", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "odds_btts_no", "type": "STRING", "mode": "NULLABLE" },
+  { "name": "stadium_name", "type": "STRING", "mode": "NULLABLE" }
+]
+                  EOF
+    csv_options {
+      quote                 = "\""
+      allow_quoted_newlines = true
+    }
+    source_uris = [
+      "gs://${google_storage_bucket.footy_stats_sink.name}/${var.matches_import_wildcard_object}"
+    ]
+  }
+}
