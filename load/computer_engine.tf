@@ -65,13 +65,15 @@ resource "google_compute_instance" "processor_vm" {
   tags = ["http-server", "https-server"]
 
   metadata = {
-    FOOTY_KEY_NAME = var.footy_key_name
-    FOOTY_USERNAME = var.footy_username
-    PROJECT_NUMBER = var.project_number
-    AA_SINK           = google_storage_bucket.footy_aa_sink.name
-    PREP_SINK           = google_storage_bucket.footy_prep_sink.name
-    IMPORT_SINK    = google_storage_bucket.footy_stats_sink.name
-    CLIMBER_STORAGE = google_storage_bucket_object.footy_stats_sink_climbers_object.name
+    FOOTY_KEY_NAME             = var.footy_key_name
+    FOOTY_USERNAME             = var.footy_username
+    PROJECT_NUMBER             = var.project_number
+    AA_SINK                    = google_storage_bucket.footy_aa_sink.name
+    PREP_SINK                  = google_storage_bucket.footy_prep_sink.name
+    IMPORT_SINK                = google_storage_bucket.footy_stats_sink.name
+    CLIMBER_STORAGE            = google_storage_bucket_object.footy_stats_sink_climbers_object.name
+    PREDICTIONS_SINK           = google_storage_bucket.footy_predictions_sink.name
+    PREDICTIONS_OVER_TIME_SINK = google_storage_bucket.footy_predictions_over_time_sink.name
   }
 }
 

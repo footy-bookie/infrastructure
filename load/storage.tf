@@ -21,3 +21,15 @@ resource "google_storage_bucket" "footy_prep_sink" {
   location = var.location
   project  = var.project
 }
+
+resource "google_storage_bucket" "footy_predictions_sink" {
+  name     = "${var.env_suffix}-footy_predictions_sink"
+  location = var.location
+  project  = var.project
+}
+
+resource "google_storage_bucket" "footy_predictions_over_time_sink" {
+  name     = "${var.env_suffix}-footy_predictions_over_time_sink"
+  location = var.location
+  project  = var.project
+}

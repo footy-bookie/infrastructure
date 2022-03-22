@@ -896,3 +896,36 @@ resource "google_bigquery_table" "matches_import" {
     ]
   }
 }
+
+resource "google_bigquery_table" "total_prediction" {
+  dataset_id = google_bigquery_dataset.data_warehouse.dataset_id
+  table_id   = "total_prediction"
+  project    = var.project
+
+  external_data_configuration {
+    autodetect    = false
+    source_format = "CSV"
+    schema        = <<EOF
+                   [
+{"name": "home_team_name", "type": "STRING", "mode": "NULLABLE"},
+ {"name": "away_team_name", "type": "STRING", "mode": "NULLABLE"},
+ {"name": "row_added", "type": "STRING", "mode": "NULLABLE"},
+ {"name": "predicted_result", "type": "STRING", "mode": "NULLABLE"},
+ {"name": "real_result", "type": "STRING", "mode": "NULLABLE"},
+ {"name": "odds_ft_home_team_win", "type": "STRING", "mode": "NULLABLE"},
+ {"name": "odds_ft_draw", "type": "STRING", "mode": "NULLABLE"},
+ {"name": "odds_ft_away_team_win", "type": "STRING", "mode": "NULLABLE"},
+ {"name": "date_time", "type": "STRING", "mode": "NULLABLE"},
+ {"name": "id", "type": "STRING", "mode": "NULLABLE"},
+ {"name": "index", "type": "STRING", "mode": "NULLABLE"}
+    ]
+                  EOF
+    csv_options {
+      quote                 = "\""
+      allow_quoted_newlines = true
+    }
+    source_uris = [
+      "gs://${google_storage_bucket.footy_predictions_sink.name}/*"
+    ]
+  }
+}
