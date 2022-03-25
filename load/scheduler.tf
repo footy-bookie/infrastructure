@@ -1,7 +1,7 @@
 resource "google_cloud_scheduler_job" "start_vm_scheduler" {
   name             = "static_data_start_import_scheduler"
   description      = "Triggers the start vm Cloud Function to start vm"
-  schedule         = "45 12 * * 5"
+  schedule         = "45 12 * * 2,5"
   time_zone        = "Europe/Berlin"
   region           = var.location
   attempt_deadline = "540s"
