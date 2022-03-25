@@ -20,9 +20,10 @@ resource "google_cloudfunctions_function" "StartServer" {
   }
 
   environment_variables = {
-    PROJECT_NUMBER = var.project_number
-    INSTANCE_NAME  = var.instance_name
-    INSTANCE_ZONE  = var.zone
+    PROJECT_NUMBER     = var.project_number
+    IMPORT_INSTANCE    = var.import_instance
+    PROCESSOR_INSTANCE = var.processor_instance
+    INSTANCE_ZONE      = var.zone
   }
 }
 
@@ -48,8 +49,9 @@ resource "google_cloudfunctions_function" "EndServer" {
   }
 
   environment_variables = {
-    PROJECT_NUMBER = var.project_number
-    INSTANCE_NAME  = var.instance_name
-    INSTANCE_ZONE  = var.zone
+    PROJECT_NUMBER     = var.project_number
+    IMPORT_INSTANCE    = var.import_instance
+    PROCESSOR_INSTANCE = var.processor_instance
+    INSTANCE_ZONE      = var.zone
   }
 }

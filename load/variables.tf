@@ -36,7 +36,11 @@ variable "footy_username" {
   type = string
 }
 
-variable "instance_name" {
+variable "import_instance" {
+  type = string
+}
+
+variable "processor_instance" {
   type = string
 }
 

@@ -10,7 +10,8 @@ module "load" {
   project_number                 = var.project_number
   footy_username                 = var.footy_username
   footy_key_name                 = var.footy_key_name
-  instance_name                  = var.instance_name
+  import_instance                = var.import_instance
+  processor_instance             = var.processor_instance
   start_import_vm_repo           = var.start_import_vm_repo
   end_import_vm_repo             = var.end_import_vm_repo
   teams_import_wildcard_object   = var.teams_import_wildcard_object
