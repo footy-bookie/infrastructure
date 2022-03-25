@@ -14,6 +14,7 @@ module "load" {
   processor_instance             = var.processor_instance
   start_import_vm_repo           = var.start_import_vm_repo
   end_import_vm_repo             = var.end_import_vm_repo
+  result_check_repo              = var.result_check_repo
   teams_import_wildcard_object   = var.teams_import_wildcard_object
   matches_import_wildcard_object = var.matches_import_wildcard_object
 }

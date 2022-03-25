@@ -61,6 +61,10 @@ variable "end_import_vm_repo" {
   type = string
 }
 
+variable "result_check_repo" {
+  type = string
+}
+
 variable "teams_import_wildcard_object" {
   type = string
 }
