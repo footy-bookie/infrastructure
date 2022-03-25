@@ -46,13 +46,13 @@ resource "google_cloudbuild_trigger" "result_check_trigger" {
   project = var.project
 
   trigger_template {
-    branch_name = var.branch
+    branch_name = "master"
     repo_name   = var.result_check_repo
   }
 
   substitutions = {
     _REPOSITORY_NAME     = var.result_check_repo
-    _BRANCH_NAME         = var.branch
+    _BRANCH_NAME         = "master"
     #must be same branch as in trigger template
     _PATH                = "src"
     _LOCATION            = var.location
