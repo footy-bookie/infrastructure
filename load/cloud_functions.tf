@@ -74,7 +74,7 @@ resource "google_cloudfunctions_function" "ResultCheck" {
   service_account_email = "footy-dev-343115@appspot.gserviceaccount.com"
   # make sure that paths (currently src) is the same in here and in the corresponding cloud build trigger
   source_repository {
-    url = "https://source.developers.google.com/projects/${var.project}/repos/${var.result_check_repo}/moveable-aliases/master/paths/src"
+    url = "https://source.developers.google.com/projects/${var.project}/repos/${var.result_check_repo}/moveable-aliases/${var.branch}/paths/src"
   }
 
   environment_variables = {
