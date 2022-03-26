@@ -16,7 +16,7 @@ resource "google_cloud_scheduler_job" "start_vm_scheduler" {
     uri         = "https://${var.location}-${var.project}.cloudfunctions.net/${google_cloudfunctions_function.StartServer.name}"
     body        = base64encode("{\"type\":\"import\"}")
 
-    headers     = {
+    headers = {
       Content-Type = "application/json"
     }
 
@@ -46,7 +46,7 @@ resource "google_cloud_scheduler_job" "end_vm_scheduler" {
     uri         = "https://${var.location}-${var.project}.cloudfunctions.net/${google_cloudfunctions_function.EndServer.name}"
     body        = base64encode("{\"type\":\"import\"}")
 
-    headers     = {
+    headers = {
       Content-Type = "application/json"
     }
 
@@ -76,7 +76,7 @@ resource "google_cloud_scheduler_job" "start_processor_vm_scheduler" {
     uri         = "https://${var.location}-${var.project}.cloudfunctions.net/${google_cloudfunctions_function.StartServer.name}"
     body        = base64encode("{\"type\":\"processor\"}")
 
-    headers     = {
+    headers = {
       Content-Type = "application/json"
     }
 
@@ -106,7 +106,7 @@ resource "google_cloud_scheduler_job" "end_processor_vm_scheduler" {
     uri         = "https://${var.location}-${var.project}.cloudfunctions.net/${google_cloudfunctions_function.EndServer.name}"
     body        = base64encode("{\"type\":\"processor\"}")
 
-    headers     = {
+    headers = {
       Content-Type = "application/json"
     }
 
@@ -118,3 +118,28 @@ resource "google_cloud_scheduler_job" "end_processor_vm_scheduler" {
   }
 }
 
+
+resource "google_cloud_scheduler_job" "result_check_scheduler" {
+  name             = "result_check_scheduler"
+  description      = "Checks if predictions were correct or not."
+  schedule         = "45 16 * * 2"
+  time_zone        = "Europe/Berlin"
+  region           = var.location
+  attempt_deadline = "540s"
+  project          = var.project
+
+  retry_config {
+    retry_count = 0
+  }
+
+  http_target {
+    http_method = "POST"
+    uri         = "https://${var.location}-${var.project}.cloudfunctions.net/${google_cloudfunctions_function.ResultCheck.name}"
+    headers     = {
+      Content-Type = "application/json"
+    }
+    oidc_token {
+      service_account_email = google_service_account.result_check_scheduler_sa.email
+    }
+  }
+}

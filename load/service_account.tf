@@ -106,6 +106,9 @@ resource "google_project_iam_member" "cloudfunction_invoker_role_to_end_vm_sched
   role    = "roles/cloudfunctions.invoker"
 }
 
+###################
+# RESULT CHECK CF #
+###################
 resource "google_service_account" "result_check_sa" {
   project      = var.project
   account_id   = "result-check-sa"
@@ -122,4 +125,19 @@ resource "google_project_iam_member" "bigquery_admin_role_result_check_sa" {
   project = var.project
   member  = "serviceAccount:${google_service_account.result_check_sa.email}"
   role    = "roles/bigquery.admin"
+}
+
+#############################
+# SCHEDULER RESULT CHECK CF #
+#############################
+resource "google_service_account" "result_check_scheduler_sa" {
+  account_id   = "result-check-scheduler-sa"
+  project      = var.project
+  display_name = "Result check cf service account"
+}
+
+resource "google_project_iam_member" "cloudfunction_invoker_role_to_result_check_cf_scheduler_sa" {
+  project = var.project
+  member  = "serviceAccount:${google_service_account.result_check_scheduler_sa.email}"
+  role    = "roles/cloudfunctions.invoker"
 }
