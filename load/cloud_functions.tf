@@ -71,7 +71,7 @@ resource "google_cloudfunctions_function" "ResultCheck" {
   entry_point           = "main"
   region                = var.location
   # invocation service account or ingress_settings = "ALLOW_INTERNAL_ONLY" setting,not both
-  service_account_email = "footy-dev-343115@appspot.gserviceaccount.com"
+  service_account_email = google_service_account.result_check_sa.email
   # make sure that paths (currently src) is the same in here and in the corresponding cloud build trigger
   source_repository {
     url = "https://source.developers.google.com/projects/${var.project}/repos/${var.result_check_repo}/moveable-aliases/${var.branch}/paths/src"
