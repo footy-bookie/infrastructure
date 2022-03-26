@@ -915,9 +915,8 @@ resource "google_bigquery_table" "total_prediction" {
  {"name": "odds_ft_home_team_win", "type": "STRING", "mode": "NULLABLE"},
  {"name": "odds_ft_draw", "type": "STRING", "mode": "NULLABLE"},
  {"name": "odds_ft_away_team_win", "type": "STRING", "mode": "NULLABLE"},
- {"name": "date_time", "type": "STRING", "mode": "NULLABLE"},
- {"name": "id", "type": "STRING", "mode": "NULLABLE"},
- {"name": "index", "type": "STRING", "mode": "NULLABLE"}
+ {"name": "match_id", "type": "FLOAT", "mode": "NULLABLE"},
+{"name": "date_time", "type": "STRING", "mode": "NULLABLE"}
     ]
                   EOF
     csv_options {
@@ -928,4 +927,56 @@ resource "google_bigquery_table" "total_prediction" {
       "gs://${google_storage_bucket.footy_predictions_sink.name}/*"
     ]
   }
+}
+
+resource "google_bigquery_table" "total_result_check" {
+  dataset_id = google_bigquery_dataset.data_warehouse.dataset_id
+  table_id   = "total_result_check"
+  project    = var.project
+
+  schema = <<EOF
+[
+  {
+    "name": "match_id",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "date_GMT",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "status",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "home_team_name",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "away_team_name",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "real_result",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "possible_win",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "predicted_results",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+  }
+]
+EOF
+
 }

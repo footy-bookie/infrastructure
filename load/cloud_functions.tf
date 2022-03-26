@@ -79,7 +79,7 @@ resource "google_cloudfunctions_function" "ResultCheck" {
 
   environment_variables = {
     PROJECT_NUMBER              = var.project_number
-    RESULT_CHECK_SINK           = google_storage_bucket.footy_result_check_sink.name
     RESULT_CHECK_OVER_TIME_SINK = google_storage_bucket.footy_result_check_over_time_sink.name
+    TOTAL_RESULT_CHECK_BQ       = google_bigquery_table.total_result_check.table_id
   }
 }
