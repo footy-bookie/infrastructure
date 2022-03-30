@@ -17,4 +17,5 @@ module "load" {
   result_check_repo              = var.result_check_repo
   teams_import_wildcard_object   = var.teams_import_wildcard_object
   matches_import_wildcard_object = var.matches_import_wildcard_object
+  appspot_sa                     = var.appspot_sa
 }

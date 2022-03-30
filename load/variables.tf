@@ -63,3 +63,7 @@ variable "teams_import_wildcard_object" {
 variable "matches_import_wildcard_object" {
   type = string
 }
+
+variable "appspot_sa" {
+  type = string
+}
