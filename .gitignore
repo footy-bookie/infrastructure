@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 /.terraform.lock.hcl
 /dev.tfvars
+
+.DS_Store
