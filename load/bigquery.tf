@@ -934,7 +934,10 @@ resource "google_bigquery_table" "total_result_check" {
   table_id   = "total_result_check"
   project    = var.project
 
-  schema = <<EOF
+  external_data_configuration {
+    autodetect    = false
+    source_format = "CSV"
+    schema        = <<EOF
 [
   {
     "name": "match_id",
@@ -978,5 +981,13 @@ resource "google_bigquery_table" "total_result_check" {
   }
 ]
 EOF
-
+    csv_options {
+      quote                 = "\""
+      allow_quoted_newlines = true
+      skip_leading_rows = 1
+    }
+    source_uris = [
+      "gs://${google_storage_bucket.footy_result_check_over_time_sink.name}/*"
+    ]
+  }
 }
