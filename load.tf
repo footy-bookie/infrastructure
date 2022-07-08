@@ -15,7 +15,10 @@ module "load" {
   start_import_vm_repo           = var.start_import_vm_repo
   end_import_vm_repo             = var.end_import_vm_repo
   result_check_repo              = var.result_check_repo
+  stats_import_repo              = var.stats_import_repo
   teams_import_wildcard_object   = var.teams_import_wildcard_object
   matches_import_wildcard_object = var.matches_import_wildcard_object
   appspot_sa                     = var.appspot_sa
+  stats_import_image             = var.stats_import_image
+  stats_import_cloud_run_sa      = var.stats_import_cloud_run_sa
 }

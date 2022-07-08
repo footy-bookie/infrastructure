@@ -1,35 +1,35 @@
 variable "project" {
-  type        = string
+  type = string
   description = "Project id"
 }
 
 variable "location" {
-  type        = string
+  type = string
   description = "Project location"
 }
 
 variable "zone" {
-  type        = string
+  type = string
   description = "Project zone"
 }
 
 variable "branch" {
-  type        = string
+  type = string
   description = "Git branch used for builds"
 }
 
 variable "project_number" {
-  type        = string
+  type = string
   description = "Project number"
 }
 
 variable "cloudbuild_file" {
-  type        = string
+  type = string
   description = "File used for cloudbuild"
 }
 
 variable "cloudbuild_sa" {
-  type        = string
+  type = string
   description = "Service account used for build pipelines"
 }
 
@@ -65,6 +65,10 @@ variable "result_check_repo" {
   type = string
 }
 
+variable "stats_import_repo" {
+  type = string
+}
+
 variable "teams_import_wildcard_object" {
   type = string
 }
@@ -74,5 +78,13 @@ variable "matches_import_wildcard_object" {
 }
 
 variable "appspot_sa" {
+  type = string
+}
+
+variable "stats_import_image" {
+  type = string
+}
+
+variable "stats_import_cloud_run_sa" {
   type = string
 }
