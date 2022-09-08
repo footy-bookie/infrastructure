@@ -7,7 +7,7 @@ resource "google_project_service" "run_api" {
 }
 
 resource "google_cloud_run_service" "stats-import-cloudrun" {
-  name = "stats-import-cloudrun"
+  name = "stats-importer"
   location = var.location
   project = var.project
 
