@@ -88,3 +88,7 @@ variable "stats_import_image" {
 variable "stats_import_cloud_run_sa" {
   type = string
 }
+
+variable "load_footy_import_url" {
+  type = string
+}

@@ -167,3 +167,18 @@ resource "google_project_iam_binding" "storage_admin_role_stats_import_cloud_run
     "serviceAccount:${google_service_account.stats_import_cloud_run_sa.email}"
   ]
 }
+
+#######################
+# Cloud Run Scheduler #
+#######################
+resource "google_service_account" "load_footy_import_sa" {
+  account_id   = "load-footy-import-sa"
+  project      = var.project
+  display_name = "load_footy_import scheduler service account"
+}
+
+resource "google_project_iam_member" "run_invoker_role_to_transform_scheduler_sa" {
+  project = var.project
+  member  = "serviceAccount:${google_service_account.load_footy_import_sa.email}"
+  role    = "roles/run.invoker"
+}

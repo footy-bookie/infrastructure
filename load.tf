@@ -21,4 +21,5 @@ module "load" {
   appspot_sa                     = var.appspot_sa
   stats_import_image             = var.stats_import_image
   stats_import_cloud_run_sa      = var.stats_import_cloud_run_sa
+  load_footy_import_url          = var.load_footy_import_url
 }
