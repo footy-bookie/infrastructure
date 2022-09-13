@@ -24,7 +24,7 @@ variable "env_suffix" {
 }
 
 variable "cloudbuild_file" {
-  type = string
+  type        = string
   description = "File used for cloudbuild"
 }
 

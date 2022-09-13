@@ -24,12 +24,12 @@ variable "project_number" {
 }
 
 variable "cloudbuild_file" {
-  type = string
+  type        = string
   description = "File used for cloudbuild"
 }
 
 variable "cloudbuild_sa" {
-  type = string
+  type        = string
   description = "Service account used for build pipelines"
 }
 

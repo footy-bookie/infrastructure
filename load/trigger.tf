@@ -84,19 +84,3 @@ resource "google_cloudbuild_trigger" "stats_import_trigger" {
   filename = "cloudbuild.yaml"
   name     = "stats-import-trigger"
 }
-
-resource "google_cloudbuild_trigger" "load_footy_import_trigger" {
-  project = var.project
-
-  trigger_template {
-    branch_name = var.branch
-    repo_name   = "github_footy-bookie_load_footy_import"
-  }
-
-  substitutions = {
-    _SA = google_service_account.stats_import_cloud_run_sa.email
-  }
-
-  filename = "cloudbuild.yaml"
-  name     = "load-footy-import-trigger"
-}

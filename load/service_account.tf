@@ -46,15 +46,15 @@ resource "google_project_iam_member" "bigquery_admin_role_processor_vm_sa" {
 # STARTS IMPORT VM SERVICEACCOUNT #
 ###################################
 
-resource "google_service_account" "starts_stats_import_sa" {
+resource "google_service_account" "starts_vm_sa" {
   project      = var.project
-  account_id   = "starts-stats-import-sa"
+  account_id   = "starts-vm-sa"
   display_name = "Starts Footy Stats Import Service Account"
 }
 
 resource "google_project_iam_member" "compute_engine_starts_stats_import_sa" {
   project = var.project
-  member  = "serviceAccount:${google_service_account.stats_import_sa.email}"
+  member  = "serviceAccount:${google_service_account.starts_vm_sa.email}"
   role    = "roles/compute.admin"
 }
 
@@ -63,7 +63,7 @@ resource "google_project_iam_member" "compute_engine_starts_stats_import_sa" {
 # END IMPORT VM SERVICEACCOUNT #
 ################################
 
-resource "google_service_account" "ends_stats_import_sa" {
+resource "google_service_account" "ends_vm_sa" {
   project      = var.project
   account_id   = "ends-stats-import-sa"
   display_name = "Ends Footy Stats Import Service Account"
@@ -71,40 +71,10 @@ resource "google_service_account" "ends_stats_import_sa" {
 
 resource "google_project_iam_member" "compute_engine_ends_stats_import_sa" {
   project = var.project
-  member  = "serviceAccount:${google_service_account.stats_import_sa.email}"
+  member  = "serviceAccount:${google_service_account.ends_vm_sa.email}"
   role    = "roles/compute.admin"
 }
 
-
-######################
-# SCHEDULER START VM #
-######################
-resource "google_service_account" "static_data_start_scheduler_sa" {
-  account_id   = "start-vm-scheduler-sa"
-  project      = var.project
-  display_name = "Start Vm service account"
-}
-
-resource "google_project_iam_member" "cloudfunction_invoker_role_to_start_vm_scheduler_sa" {
-  project = var.project
-  member  = "serviceAccount:${google_service_account.starts_stats_import_sa.email}"
-  role    = "roles/cloudfunctions.invoker"
-}
-
-####################
-# SCHEDULER END VM #
-####################
-resource "google_service_account" "static_data_end_scheduler_sa" {
-  account_id   = "end-vm-scheduler-sa"
-  project      = var.project
-  display_name = "End Vm service account"
-}
-
-resource "google_project_iam_member" "cloudfunction_invoker_role_to_end_vm_scheduler_sa" {
-  project = var.project
-  member  = "serviceAccount:${google_service_account.ends_stats_import_sa.email}"
-  role    = "roles/cloudfunctions.invoker"
-}
 
 ###################
 # RESULT CHECK CF #
@@ -151,14 +121,6 @@ resource "google_service_account" "stats_import_cloud_run_sa" {
   display_name = "stats_import2_cloud_run_sa"
 }
 
-
-resource "google_project_iam_binding" "secretAccessor_role_stats_import_cloud_run_sa" {
-  project = var.project
-  role    = "roles/secretmanager.secretAccessor"
-  members = [
-    "serviceAccount:${google_service_account.stats_import_cloud_run_sa.email}"
-  ]
-}
 
 resource "google_project_iam_binding" "storage_admin_role_stats_import_cloud_run_sa" {
   project = var.project
